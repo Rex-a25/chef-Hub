@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
     const [menuOpen, setMenuOpen] = useState(false); 
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -21,7 +23,9 @@ const Nav = () => {
         <nav className='bg-white shadow-md sticky top-0 z-50 p-4 mb-20 sm:p-6'>
             <div className='max-w-7xl mx-auto flex items-center justify-between'>
                 
-                <h1 className='text-[#FF5722] text-3xl sm:text-4xl -rotate-3 hover:scale-120 duration-500 font-extrabold'>
+                <h1 
+                onClick={()=>navigate('/')}
+                className='text-[#FF5722] cursor-pointer text-3xl sm:text-4xl -rotate-3 hover:scale-120 duration-500 font-extrabold'>
                     CHEFS <span className='text-[#333] inline-block transition  duration-500 rotate-6 scale-110'>hub</span>
                 </h1>
 
