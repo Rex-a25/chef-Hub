@@ -45,13 +45,14 @@ const MiddleIntro = () => {
           Browse Recipes
         </motion.button>
 
-        <motion.button
+        {/* <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
           className="border border-gray-300 px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition"
+          // onClick={navigate('/category/:catName')}
         >
           View Categories
-        </motion.button>
+        </motion.button> */}
       </motion.div>
 
       <motion.div

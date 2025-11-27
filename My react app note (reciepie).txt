@@ -400,3 +400,53 @@ I’ll then help you create:
 * Step-by-step building guide
 
 Just choose **A or B** bro 👍🏽
+
+
+
+
+-----------------------------------------------
+| {{ strMeal }}                                |
+| Category: {{ strCategory }} ({{ strArea }})  |
+-----------------------------------------------
+| [strMealThumb]                               |
+-----------------------------------------------
+| Ingredients                                  |
+| auto-loop ingredients/measures               |
+-----------------------------------------------
+| Steps (strInstructions)                      |
+-----------------------------------------------
+| YouTube link (if any)                        |
+-----------------------------------------------
+
+--------------------------------------------------------------
+| ChefHub (logo)     Home   Recipes   Categories             |
+--------------------------------------------------------------
+
+|                {{ strMeal }}                               |
+|   Category: {{ strCategory }}   •   Origin: {{ strArea }}  |
+--------------------------------------------------------------
+
+| [ Image: strMealThumb ]                                    |
+--------------------------------------------------------------
+
+| Ingredients                                                |
+| - {{ strIngredient1 }} — {{ strMeasure1 }}                 |
+| - {{ strIngredient2 }} — {{ strMeasure2 }}                 |
+| - {{ strIngredient3 }} — {{ strMeasure3 }}                 |
+|   ... automatically loop until ingredient is empty         |
+--------------------------------------------------------------
+
+| Instructions                                               |
+| {{ strInstructions }}                                      |
+--------------------------------------------------------------
+
+| Watch Video (if available)                                 |
+| [ YouTube Button → strYoutube ]                            |
+--------------------------------------------------------------
+
+| Similar Recipes (same category)                            |
+| [meal card] [meal card] [meal card] [meal card]            |
+--------------------------------------------------------------
+
+| Footer                                                     |
+--------------------------------------------------------------

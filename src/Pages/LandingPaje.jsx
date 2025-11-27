@@ -135,7 +135,9 @@ const LandingPaje = () => {
         <p className="text-sm text-gray-600 mt-2 line-clamp-3">
           {cat.strCategoryDescription}
         </p>
-        <p className="mt-4 text-[#FF5722] font-medium text-sm hover:underline">View Category→</p>
+        <p 
+         onClick={() => navigate(`/category/${cat.strCategory}`)}
+        className="mt-4 text-[#FF5722] font-medium text-sm hover:underline">View Category→</p>
       </div>
     ))}
   </div>
