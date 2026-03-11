@@ -24,10 +24,17 @@ const Nav = () => {
             <div className='max-w-7xl mx-auto flex items-center justify-between'>
                 
                 <h1 
-                onClick={()=>navigate('/')}
-                className='text-[#FF5722] cursor-pointer text-3xl sm:text-4xl -rotate-3 hover:scale-120 duration-500 font-extrabold'>
-                   <img src="https://www.bing.com/th/id/OIP.s8_2qqDvZG2IFZLjAhSOEQHaHa?w=193&h=193&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" />" alt="Logo" 
-                </h1>
+  onClick={() => navigate('/')}
+  // Using inline-block so the transform (rotate/scale) applies smoothly to the wrapper
+  className='cursor-pointer inline-block -rotate-3 hover:scale-110 transition-transform duration-500'
+>
+  <img 
+    src="https://www.bing.com/th/id/OIP.s8_2qqDvZG2IFZLjAhSOEQHaHa?w=193&h=193&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" 
+    alt="Logo" 
+    // Added width classes here to make the image scale on different screen sizes
+    className='w-10 sm:w-12 md:w-16 h-auto drop-shadow-md' 
+  />
+</h1>
 
                 <ol className='hidden md:flex gap-8 lg:gap-12 items-center content-center text-lg font-medium'>
                     <li className='transform transition duration-300 hover:scale-105'>
