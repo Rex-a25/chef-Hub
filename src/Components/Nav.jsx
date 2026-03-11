@@ -26,7 +26,7 @@ const Nav = () => {
                 <h1 
                 onClick={()=>navigate('/')}
                 className='text-[#FF5722] cursor-pointer text-3xl sm:text-4xl -rotate-3 hover:scale-120 duration-500 font-extrabold'>
-                    CHEFS <span className='text-[#333] inline-block transition  duration-500 rotate-6 scale-110'>hub</span>
+                   <img src="https://www.bing.com/th/id/OIP.s8_2qqDvZG2IFZLjAhSOEQHaHa?w=193&h=193&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" />" alt="Logo" 
                 </h1>
 
                 <ol className='hidden md:flex gap-8 lg:gap-12 items-center content-center text-lg font-medium'>
