@@ -2,12 +2,11 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const MiddleIntro = () => {
+  const navigate = useNavigate();
 
-     const navigate = useNavigate()
-
-    const handleNavigate = () => {
-      navigate('/recipe');
-    }
+  const handleNavigate = () => {
+    navigate('/recipes');
+  };
 
   return (
     <section className="max-w-4xl mx-auto py-20 px-6 text-center">
@@ -40,19 +39,10 @@ const MiddleIntro = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
           className="bg-[#FF5722] text-white px-6 py-3 rounded-lg shadow-md transition"
-          onClick={()=>handleNavigate()}
+          onClick={handleNavigate}
         >
           Browse Recipes
         </motion.button>
-
-        {/* <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
-          className="border border-gray-300 px-6 py-3 rounded-lg shadow-sm hover:shadow-md transition"
-          // onClick={navigate('/category/:catName')}
-        >
-          View Categories
-        </motion.button> */}
       </motion.div>
 
       <motion.div
@@ -87,4 +77,3 @@ const MiddleIntro = () => {
 };
 
 export default MiddleIntro;
-

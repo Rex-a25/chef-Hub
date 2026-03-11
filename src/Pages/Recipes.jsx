@@ -1,65 +1,139 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { nigerianRecipes } from "../data/nigerianRecipes";
+import { africanRecipes } from "../data/africanRecipes";
 
 const Recipes = () => {
   const [meal, setMeal] = useState(null);
+  const navigate = useNavigate();
+
+  // Combine both datasets for the full library view
+  const allLocalRecipes = [...nigerianRecipes, ...africanRecipes];
 
   const getMealRandomly = async () => {
-    const res = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
-    const data = await res.json();
-    setMeal(data.meals[0]);
+    try {
+      const res = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
+      const data = await res.json();
+      setMeal(data.meals[0]);
+    } catch (error) {
+      console.error("Error fetching random meal:", error);
+    }
   };
 
   useEffect(() => {
-    getMealRandomly(); // fetch on mount
+    getMealRandomly();
   }, []);
 
   if (!meal) {
     return (
       <div className="text-[#FF5722] font-bold text-lg animate-pulse mt-10 text-center">
-        Loading Recipe...
+        Loading Chef's Selection...
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-5">
-      {/* Title */}
-      <h1 className="text-3xl font-bold text-center mb-2 text-[#FF5722] animate-fadeIn">
-        Recipe of the Hour
-      </h1>
+    <div className="max-w-6xl mx-auto p-5 pb-20">
+      
+      {/* SECTION 1: FEATURED RECIPE OF THE HOUR */}
+      <section className="mb-16">
+        <h1 className="text-3xl font-bold text-center mb-8 text-[#FF5722]">
+          Recipe of the <span className="text-[#333]">Hour</span>
+        </h1>
 
-      <h2 className="text-xl md:text-2xl font-semibold text-center mb-4 animate-slideUp">
-        {meal.strMeal}
-      </h2>
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col md:flex-row items-center">
+          {/* Featured Image */}
+          <div className="w-full md:w-1/2 h-64 md:h-[400px]">
+            <img
+              src={meal.strMealThumb}
+              alt={meal.strMeal}
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-      {/* Image */}
-      <div className="flex justify-center mb-6">
-        <img
-          src={meal.strMealThumb}
-          alt={meal.strMeal}
-          className="rounded-xl shadow-lg w-full max-w-md transform transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fadeIn"
-        />
-      </div>
+          {/* Featured Content */}
+          <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
+            <span className="text-[#FF5722] font-bold text-sm tracking-widest uppercase mb-2">
+              Featured Selection
+            </span>
+            <h2 className="text-3xl font-extrabold text-[#333] mb-4">
+              {meal.strMeal}
+            </h2>
+            <div className="flex gap-4 mb-6 text-sm text-gray-500">
+              <p><b>Category:</b> {meal.strCategory}</p>
+              <p><b>Origin:</b> {meal.strArea}</p>
+            </div>
+            
+            <div className="flex gap-4">
+                <button
+                    onClick={() => navigate(`/recipe/${meal.idMeal}`)}
+                    className="bg-[#333] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#FF5722] transition-all"
+                >
+                    View Recipe
+                </button>
+                <button
+                    onClick={getMealRandomly}
+                    className="border-2 border-gray-200 text-gray-600 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition-all"
+                >
+                    Try Another
+                </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Category + Origin */}
-      <div className="text-center text-gray-700 mb-6 space-y-2 animate-slideUp">
-        <p><b>Category:</b> {meal.strCategory}</p>
-        <p><b>Origin:</b> {meal.strArea}</p>
-      </div>
+      <hr className="mb-16 border-gray-200" />
 
-      {/* Instructions */}
-      <div className="bg-white rounded-xl shadow-md p-5 md:p-7 leading-relaxed text-gray-800 animate-fadeIn">
-        <h3 className="text-2xl font-bold mb-3 text-[#FF5722]">Instructions</h3>
-        <p className="whitespace-pre-line">{meal.strInstructions}</p>
-      </div>
+      {/* SECTION 2: THE FULL AFRICAN LIBRARY */}
+      <section>
+        <div className="flex items-center justify-between mb-10">
+            <div>
+                <h2 className="text-3xl font-bold text-[#333]">
+                    The <span className="text-[#FF5722]">Full Library</span>
+                </h2>
+                <p className="text-gray-500 mt-2">Explore our growing collection of authentic African dishes.</p>
+            </div>
+            <div className="hidden md:block bg-gray-100 px-4 py-2 rounded-full text-sm font-bold text-gray-600">
+                {allLocalRecipes.length} Recipes Found
+            </div>
+        </div>
 
-      {/* New Meal Button */}
-      <button
-        onClick={getMealRandomly}
-        className="mt-6 bg-[#FF5722] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[#e64a19] transition duration-300 transform hover:-translate-y-1 animate-fadeIn"
-      >
-        Get New Meal
-      </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {allLocalRecipes.map((recipe) => (
+            <div
+              key={recipe.idMeal}
+              onClick={() => navigate(`/recipe/${recipe.idMeal}`)}
+              className="group cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden"
+            >
+              {/* Card Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={recipe.strMealThumb}
+                  alt={recipe.strMeal}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-[#FF5722] shadow-sm">
+                  {recipe.strArea.toUpperCase()}
+                </div>
+              </div>
+
+              {/* Card Content */}
+              <div className="p-5">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
+                  {recipe.strCategory}
+                </p>
+                <h3 className="text-lg font-bold text-[#333] group-hover:text-[#FF5722] transition-colors line-clamp-1">
+                  {recipe.strMeal}
+                </h3>
+                <div className="mt-4 flex items-center text-[#FF5722] text-sm font-bold">
+                    Learn to cook →
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </div>
   );
 };
